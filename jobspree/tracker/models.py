@@ -11,8 +11,10 @@ class Applying(models.Model):
     
 
 class Applied(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE , null=True)
     company = models.CharField(max_length=50)
     date = models.DateField()
     result = models.CharField(max_length=50)
     score = models.IntegerField()
+    def __str__(self):
+        return f'{self.user} | {self.company} | {self.date} | {self.result} | {self.score}'

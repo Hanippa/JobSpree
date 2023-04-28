@@ -1,0 +1,26 @@
+{%extends 'tracker/base.html'%}
+
+{%block content%}
+
+
+
+  <table summary="no_orderDate">
+    <tr><th>Company</th><th>Date</th><th>Result<th>Score</th></th>
+    {% for row in applied_table %}
+            <tr>
+              <td>{{ row.company }}</td>
+              <td>{{ row.date }}</td>
+              <td>{{ row.result }}</td>
+              <td>{{ row.score }}</td>
+            </tr>
+    {% endfor %}
+    </table>
+    
+    <form method="post" action="">{%csrf_token%}
+      <div class="form-container">
+      {{form}}
+    </div>
+    <button type="submit">+</button>
+  </form>
+
+{%endblock%}

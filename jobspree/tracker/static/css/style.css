@@ -9,7 +9,7 @@ a{
     margin:0
 }
 nav{
-    background-color: lightgray;
+    background-color: rgb(201, 201, 201);
     display: flex;
     justify-content: space-between;
 }
@@ -35,3 +35,27 @@ nav{
     margin: 10px;
 
 }
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    width: 20%;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  .form-container{
+    width: 100%;
+    display: flex;
+  }
+  .form-container input{
+        border: 1px solid #dddddd;
+    flex-grow: 1;
+  }
