@@ -1,0 +1,18 @@
+{%extends 'tracker/base.html'%}
+
+{%block title%}Sign Up{% endblock %}
+
+{%block content%}
+
+<form method="post" action="">{%csrf_token%}
+
+
+
+    <p>Already have an accuont? Login <a href="/login">Here</a></p>
+    {{form}}
+    <button type="submit">Register</button>
+</form>
+
+
+
+{% endblock %}
