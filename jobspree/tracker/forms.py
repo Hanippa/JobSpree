@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Applying , Applied
+from .models import Applying , Applied , Interviews
 
 class applyingForm(forms.ModelForm):
     user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput() , required=False)
@@ -25,3 +25,19 @@ class appliedForm(forms.ModelForm):
         self.fields['date'].label = ""
         self.fields['result'].label = ""
         self.fields['score'].label = ""
+
+class interviewsForm(forms.ModelForm):
+    user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput() , required=False)
+    recording = forms.FileField(widget=forms.FileInput(attrs={'accept':'video/* , audio/*'}))
+    class Meta:
+        model = Interviews
+        fields = "__all__"
+        exclude = ('user' , 'recording')
+    def __init__(self, *args, **kwargs):
+        super(interviewsForm, self).__init__(*args, **kwargs)
+        self.fields['company'].label = ""
+        self.fields['date'].label = ""
+        self.fields['result'].label = ""
+        self.fields['score'].label = ""
+        self.fields['application'].label = ""
+        self.fields['recording'].label = ""

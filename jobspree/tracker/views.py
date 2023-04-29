@@ -1,8 +1,8 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login , logout ,authenticate
-from .forms import applyingForm , appliedForm
-from .models import Applying , Applied
+from .forms import applyingForm , appliedForm , interviewsForm
+from .models import Applying , Applied , Interviews
 
 
 def applying(request):
@@ -46,6 +46,29 @@ def applied(request):
     context ={'form':form ,'applied_table' :applied_table}
     return render(request, 'tracker/applied.html', context)
 
+def interviews(request):
+    if request.method == 'POST':
+        form = interviewsForm(request.POST , request.FILES)
+        if form.is_valid():
+            company = form.cleaned_data['company']
+            date = form.cleaned_data['date']
+            result = form.cleaned_data['result']
+            score = form.cleaned_data['score']
+            application = form.cleaned_data['application']
+            recording = request.FILES['recording']
+            user = request.user
+            new_interview = Interviews(user = user ,company = company , date = date , result = result ,  score = score , application = application , recording = recording)
+            new_interview.save()
+            return redirect('/interviews')
+    else:
+        form = interviewsForm()
+    try:
+        interviews_table = Interviews.objects.filter(user = request.user).order_by('-score')
+    except:
+        return redirect('/login')
+    context ={'form':form ,'interviews_table' :interviews_table}
+    return render(request, 'tracker/interviews.html', context)
+
 
 
 
@@ -60,3 +83,19 @@ def sign_up(request):
         form = UserCreationForm()
 
     return render(request , 'registration/sign-up.html' , {'form':form})
+
+
+def delete_applied(request , id):
+    item = Applied.objects.get(id = id)
+    item.delete()
+    return redirect('/applied')
+
+def delete_applying(request , id):
+    item = Applying.objects.get(id = id)
+    item.delete()
+    return redirect('/applying')
+
+def delete_interview(request , id):
+    item = Interviews.objects.get(id = id)
+    item.delete()
+    return redirect('/interviews')

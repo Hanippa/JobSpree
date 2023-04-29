@@ -10,7 +10,7 @@
             <tr>
               <td>{{ row.company }}</td>
               <td>{{ row.keywords }}</td>
-              <td>{{ row.priority }}</td>
+              <td>{{ row.priority }} <a href="/delete-applying/{{row.id}}">X</a> </td>
             </tr>
     {% endfor %}
     </table>

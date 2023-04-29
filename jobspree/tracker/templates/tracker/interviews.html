@@ -1,0 +1,36 @@
+{%extends 'tracker/base.html'%}
+
+{%block content%}
+
+
+
+  <table summary="no_orderDate">
+    <tr><th>Company</th><th>Date</th><th>Result<th>Score</th><th>Application</th><th>Recording</th></th>
+    {% for row in interviews_table %}
+            <tr>
+              <td>{{ row.company }}</td>
+              <td>{{ row.date }}</td>
+              <td>{{ row.result }}</td>
+              <td>{{ row.score }}</td>
+              <td>{{ row.application }}</td>
+              <td> 
+
+                <audio controls>
+                  <source src="{{row.recording}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+                </audio> 
+                   <a href="/delete-interview/{{row.id}}">X</a></td>
+            </tr>
+    {% endfor %}
+    </table>
+    
+    <form method="post" action="" enctype="multipart/form-data">{%csrf_token%}
+      <div class="form-container">
+      {{form}}
+    </div>
+    <button type="submit">+</button>
+    
+    
+  </form>
+
+{%endblock%}
