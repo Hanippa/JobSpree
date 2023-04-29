@@ -7,6 +7,9 @@ import openai
 from .key import api_key
 
 
+def home(request):
+    return render(request, 'tracker/home.html')
+
 def applying(request):
     if request.method == 'POST':
         form = applyingForm(request.POST)
