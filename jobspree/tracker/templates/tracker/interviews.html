@@ -19,7 +19,9 @@
                   <source src="{{row.recording}}" type="audio/mpeg">
                 Your browser does not support the audio element.
                 </audio> 
-                   <a href="/delete-interview/{{row.id}}">X</a></td>
+                   <a href="/delete-interview/{{row.id}}">X</a>
+                   <a href="/interview/{{row.id}}">Page</a>
+                  </td>
             </tr>
     {% endfor %}
     </table>

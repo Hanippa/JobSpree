@@ -1,0 +1,56 @@
+{%extends 'tracker/base.html'%}
+
+{%block content%}
+
+<div class="main-container">
+
+        <div class="info-container">
+
+
+                    <div class="info-container-left">
+                    <div class="info-header">
+                      <div class="info-score">
+                        {{interview.score }}
+                      </div>
+                      {{interview.company}}
+      
+                    </div>
+
+                    <div class="info-body">
+                      <div class="info-date">
+                      {{interview.date}}
+                    </div>
+                    <div class="info-result">
+                      {{interview.result}}
+                    </div>
+
+                  </div>
+
+                    </div>
+                    <div class="info-container-right">
+                      <div class="info-header">
+                        Transcription
+                      </div>
+                      <audio controls>
+                        <source src="../{{interview.recording}}" type="audio/mpeg">
+                      Your browser does not support the audio element.
+                      </audio> 
+                      <a href="/transcribe/{{interview.id}}">Generate Transcript</a>
+                      <div class="transcript">
+                      {{interview.transcript}}
+                    </div>
+                    </div>
+
+
+        </div>
+
+</div>
+{%endblock%}
+
+user = models.ForeignKey(User, on_delete=models.CASCADE , null=True)
+company = models.CharField(max_length=50)
+date = models.DateField()
+result = models.CharField(max_length=50)
+application = models.ForeignKey(Applied, on_delete= models.CASCADE)
+score = models.IntegerField()
+recording = models.FileField(blank=True , null=True , upload_to='static/media')

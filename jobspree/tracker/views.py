@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login , logout ,authenticate
 from .forms import applyingForm , appliedForm , interviewsForm
 from .models import Applying , Applied , Interviews
+import openai
+from .key import api_key
 
 
 def applying(request):
@@ -69,8 +71,16 @@ def interviews(request):
     context ={'form':form ,'interviews_table' :interviews_table}
     return render(request, 'tracker/interviews.html', context)
 
+def application(request , id):
+    context = {}
+    context['application'] = Applied.objects.get(id = id)
+    return render(request, 'tracker/application.html' , context)
 
 
+def interview(request , id):
+    context = {}
+    context['interview'] = Interviews.objects.get(id = id)
+    return render(request, 'tracker/interview.html' , context)
 
 def sign_up(request):
     if request.method == 'POST':
@@ -99,3 +109,20 @@ def delete_interview(request , id):
     item = Interviews.objects.get(id = id)
     item.delete()
     return redirect('/interviews')
+
+def transcribe(request , id):
+    API_KEY = api_key
+    model_id = 'whisper-1'
+    interview_to = Interviews.objects.get(id = id)
+    # media_file_path = interview_to.recording
+    # media_file = open(media_file_path, 'rb')
+    media_file = interview_to.recording
+
+    response = openai.Audio.transcribe(
+        api_key=API_KEY,
+        model=model_id,
+        file=media_file
+    )
+    interview_to.transcript = response['text']
+    interview_to.save()
+    return redirect(f'/interview/{id}')
