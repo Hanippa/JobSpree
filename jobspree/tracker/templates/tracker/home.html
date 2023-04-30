@@ -2,7 +2,8 @@
 
 {%block content%}
 
-Welcome
+<h1>Total Applications : {{applied.count}}</h1>
+<h1>Average Application Score <span id='average-score'></span></h1>
 
 <div>
   <canvas id="myChart"></canvas>
@@ -32,3 +33,6 @@ Welcome
   });
 </script>
 {%endblock%}
+
+{% comment %} questions : How to you get the average of the scores?
+            How do you limit the multi choice to only of the specific user? {% endcomment %}

@@ -8,7 +8,11 @@ from .key import api_key
 
 
 def home(request):
-    return render(request, 'tracker/home.html')
+    context = {}
+    context['applying'] = Applying.objects.filter(user = request.user)
+    context['applied'] = Applied.objects.filter(user = request.user)
+    context['interviews'] = Interviews.objects.filter(user = request.user)
+    return render(request, 'tracker/home.html' , context)
 
 def applying(request):
     if request.method == 'POST':

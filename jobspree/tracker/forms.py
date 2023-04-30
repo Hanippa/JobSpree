@@ -33,6 +33,8 @@ class interviewsForm(forms.ModelForm):
         model = Interviews
         fields = "__all__"
         exclude = ('user' , 'recording' , 'transcript')
+
+        
     def __init__(self, *args, **kwargs):
         super(interviewsForm, self).__init__(*args, **kwargs)
         self.fields['company'].label = ""
