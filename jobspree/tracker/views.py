@@ -9,9 +9,23 @@ from .key import api_key
 
 def home(request):
     context = {}
-    context['applying'] = Applying.objects.filter(user = request.user)
-    context['applied'] = Applied.objects.filter(user = request.user)
-    context['interviews'] = Interviews.objects.filter(user = request.user)
+    applied = list(Applied.objects.filter(user = request.user).values())
+    interviews = list(Interviews.objects.filter(user = request.user).values())
+    months = {'01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'9':0,'10':0,'11':0,'12':0}
+    applied_sum
+
+    for i in applied:
+        months[i['date'].strftime("%m")] += 1
+        applied_avg.append(i['score'])
+    context['month_applied'] = list(months.values())
+    
+    
+    months = {'01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'9':0,'10':0,'11':0,'12':0}
+
+
+    for i in interviews:
+        months[i['date'].strftime("%m")] += 1
+    context['month_interviews'] = list(months.values())
     return render(request, 'tracker/home.html' , context)
 
 def applying(request):
