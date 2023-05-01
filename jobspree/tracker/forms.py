@@ -31,12 +31,12 @@ class interviewsForm(forms.ModelForm):
     recording = forms.FileField(widget=forms.FileInput(attrs={'accept':'video/* , audio/*'}))
     class Meta:
         model = Interviews
-        fields = "__all__"
-        exclude = ('user' , 'recording' , 'transcript')
+        fields = ['company' , 'date' , 'result' , 'application' , 'score' ]
 
-        
     def __init__(self, *args, **kwargs):
+        fuser = kwargs.pop('user')
         super(interviewsForm, self).__init__(*args, **kwargs)
+        self.fields['application'].queryset = Applied.objects.filter(user = fuser)
         self.fields['company'].label = ""
         self.fields['date'].label = ""
         self.fields['result'].label = ""

@@ -129,3 +129,8 @@ table {
     text-align: center;
     padding: 30px 0px;
   }
+
+  .graph{
+    width: 500px;
+  }
+  

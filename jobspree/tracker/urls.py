@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import applied , applying , sign_up , delete_applied, delete_applying , delete_interview , interviews , interview , application , transcribe , home
+from .views import applied , applying , sign_up , delete_applied, delete_applying , delete_interview , interviews , interview , application , transcribe , home , suggest
 
 urlpatterns = [
     path('applying', applying , name='applying'),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('interview/<int:id>' , interview , name='interview'),
     path('application/<int:id>' , application , name='application'),
     path('transcribe/<int:id>' , transcribe , name='transcribe'),
+    path('suggest/<int:id>' , suggest , name='suggest'),
     path('' , home , name='home'),
     path('home' , home , name='home')
 

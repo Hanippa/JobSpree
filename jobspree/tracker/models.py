@@ -28,5 +28,6 @@ class Interviews(models.Model):
     score = models.IntegerField()
     recording = models.FileField(blank=True , null=True , upload_to='static/media')
     transcript = models.TextField(blank=True , null=True)
+    suggestions = models.TextField(blank=True , null=True)
     def __str__(self):
         return f'{self.user} | {self.company} | {self.date} | {self.result} | {self.application} | {self.score}'

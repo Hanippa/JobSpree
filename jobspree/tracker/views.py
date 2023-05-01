@@ -5,19 +5,32 @@ from .forms import applyingForm , appliedForm , interviewsForm
 from .models import Applying , Applied , Interviews
 import openai
 from .key import api_key
-
+import math
 
 def home(request):
     context = {}
     applied = list(Applied.objects.filter(user = request.user).values())
     interviews = list(Interviews.objects.filter(user = request.user).values())
-    months = {'01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'9':0,'10':0,'11':0,'12':0}
-    applied_sum
 
+    applied_scores = []
     for i in applied:
+        applied_scores .append(i['score'])
+    context['applied'] = applied
+    context['applied_scores'] = applied_scores
+
+    months = {'01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'9':0,'10':0,'11':0,'12':0}
+    
+    applied_count = 0
+    applied_sum = 0
+    success_rate = 0
+    for i in applied:
+        applied_sum += i['score']
+        if i['score'] > 7:
+            success_rate += 1
+        applied_count += 1
         months[i['date'].strftime("%m")] += 1
-        applied_avg.append(i['score'])
     context['month_applied'] = list(months.values())
+    context['applied_score_avg'] ="%.2f" % (applied_sum/applied_count)
     
     
     months = {'01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'9':0,'10':0,'11':0,'12':0}
@@ -26,6 +39,9 @@ def home(request):
     for i in interviews:
         months[i['date'].strftime("%m")] += 1
     context['month_interviews'] = list(months.values())
+
+    context['success_rate'] = math.floor((success_rate/applied_count)*100)
+    context['applied_count'] = applied_count
     return render(request, 'tracker/home.html' , context)
 
 def applying(request):
@@ -71,7 +87,7 @@ def applied(request):
 
 def interviews(request):
     if request.method == 'POST':
-        form = interviewsForm(request.POST , request.FILES)
+        form = interviewsForm(request.POST , request.FILES , user=request.user)
         if form.is_valid():
             company = form.cleaned_data['company']
             date = form.cleaned_data['date']
@@ -84,7 +100,7 @@ def interviews(request):
             new_interview.save()
             return redirect('/interviews')
     else:
-        form = interviewsForm()
+        form = interviewsForm(user=request.user)
     try:
         interviews_table = Interviews.objects.filter(user = request.user).order_by('-score')
     except:
@@ -135,8 +151,6 @@ def transcribe(request , id):
     API_KEY = api_key
     model_id = 'whisper-1'
     interview_to = Interviews.objects.get(id = id)
-    # media_file_path = interview_to.recording
-    # media_file = open(media_file_path, 'rb')
     media_file = interview_to.recording
 
     response = openai.Audio.transcribe(
@@ -145,5 +159,21 @@ def transcribe(request , id):
         file=media_file
     )
     interview_to.transcript = response['text']
+    interview_to.save()
+    return redirect(f'/interview/{id}')
+
+
+def suggest(request , id):
+    openai.api_key = api_key
+    interview_to = Interviews.objects.get(id = id)
+    text = interview_to.transcript
+
+    response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+            {"role": "user", "content": f'Can you please give points to improve my interview that i had to get a job? this is the interview transcript: {text}'},
+        ]
+    )
+    interview_to.suggestions = response.choices[0].message.content
     interview_to.save()
     return redirect(f'/interview/{id}')

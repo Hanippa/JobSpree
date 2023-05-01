@@ -2,27 +2,33 @@
 
 {%block content%}
 
-<h1>Total Applications : {{applied.count}}</h1>
-<h1>Average Application Score <span id='average-score'></span></h1>
-<h1>Month applied {{month_applied}}</h1>
-<h1>{{month_interviews}}</h1>
-<div>
+<h1>Total Applications : {{applied_count}}</h1>
+<h1>Average Application Score <span id='average-score'>{{applied_score_avg}}</span></h1>
+<h1>Sucess Rate <span >{{success_rate}}%</span></h1>
+<div class='graph'>
   <canvas id="applied_chart"></canvas>
+</div>
+<div class='graph'>
   <canvas id="interviews_chart"></canvas>
 </div>
+<div class='graph'>
+  <canvas id="interview_score_progression_graph"></canvas>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
   const applied_chart = document.getElementById('applied_chart');
   const interviews_chart = document.getElementById('interviews_chart');
+  const interview_score_progression_graph = document.getElementById('interview_score_progression_graph')
 
   new Chart(applied_chart, {
     type: 'bar',
     data: {
       labels: ['January' , 'February' , 'March' , 'April' , 'May' , 'June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December'],
       datasets: [{
-        label: '# of Applications',
+        label: 'Number of Applications',
         data: {{month_applied}},
         backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
@@ -46,6 +52,7 @@
       }]
     },
     options: {
+      
       scales: {
         y: {
           beginAtZero: true
@@ -58,7 +65,7 @@
     data: {
       labels: ['January' , 'February' , 'March' , 'April' , 'May' , 'June' , 'July' , 'August' , 'September' , 'October' , 'November' , 'December'],
       datasets: [{
-        label: '# of Interviews',
+        label: 'Number of Interviews',
         data: {{month_interviews}},
         backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
@@ -89,6 +96,47 @@
       }
     }
   });
+  new Chart(interview_score_progression_graph, {
+    type: 'line',
+    
+    data: {
+      labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,
+      51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],
+      datasets: [{
+        label: 'Score Progression',
+        data: {{applied_scores}},
+        backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)'
+    ],
+    borderColor: [
+    'rgb(255, 99, 132)',
+    'rgb(255, 159, 64)',
+    'rgb(255, 205, 86)',
+    'rgb(75, 192, 192)',
+    'rgb(54, 162, 235)',
+    'rgb(153, 102, 255)',
+    'rgb(201, 203, 207)'
+  ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      
+      scales: {
+        x: {
+          type:'linear'
+        },
+        y:{beginAtZero: true}
+      }
+    }
+  });
 </script>
+
 {%endblock%}
 
