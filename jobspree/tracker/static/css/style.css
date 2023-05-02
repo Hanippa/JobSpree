@@ -133,4 +133,9 @@ table {
   .graph{
     width: 500px;
   }
-  
+
+  #id_result{
+    width: 100%;
+    height: 15px;
+
+  }

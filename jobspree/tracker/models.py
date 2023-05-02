@@ -17,7 +17,7 @@ class Applied(models.Model):
     result = models.TextField()
     score = models.IntegerField()
     def __str__(self):
-        return f'{self.company} | {self.date} | {self.result} | {self.score}'
+        return f'{self.company} | {self.date}'
 
 class Interviews(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE , null=True)

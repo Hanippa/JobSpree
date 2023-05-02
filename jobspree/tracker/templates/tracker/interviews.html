@@ -5,6 +5,7 @@
 
 
   <table summary="no_orderDate">
+
     <tr><th>Company</th><th>Date</th><th>Result<th>Score</th><th>Application</th><th>Recording</th></th>
     {% for row in interviews_table %}
             <tr>
@@ -24,15 +25,22 @@
                   </td>
             </tr>
     {% endfor %}
-    </table>
-    
+
     <form method="post" action="" enctype="multipart/form-data">{%csrf_token%}
       <div class="form-container">
-      {{form}}
+        <td>{{form.company}}</td>
+      <td> {{form.date}}</td>
+      <td>{{form.result}}</td>
+      <td>{{form.score}}</td>
+      <td >{{form.application}}</td>
+      <td> {{form.recording}}</td>
     </div>
     <button type="submit">+</button>
     
     
-  </form>
+    </form>
+    </table>
+    
+
 
 {%endblock%}

@@ -14,13 +14,25 @@
               <td>{{ row.score }}<a href="/delete-applied/{{row.id}}">X</a><a href="/application/{{row.id}}">Page</a></td>
             </tr>
     {% endfor %}
-    </table>
-    
+
+
+
     <form method="post" action="">{%csrf_token%}
       <div class="form-container">
-      {{form}}
+      <td>{{form.company}}</td>
+      <td>{{form.date}}</td>
+      <td>{{form.result}}</td>
+      <td>{{form.score}}
+
+
+        <button type="submit">+</button>
+      </td>
+      
     </div>
-    <button type="submit">+</button>
+    
   </form>
+    </table>
+    
+
 
 {%endblock%}

@@ -171,7 +171,7 @@ def suggest(request , id):
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[
-            {"role": "user", "content": f'Can you please give points to improve my interview that i had to get a job? this is the interview transcript: {text}'},
+            {"role": "user", "content": f'The following is a transcript of a interview I did: {text} based on this transcript list several ways I can improve my interview performence'},
         ]
     )
     interview_to.suggestions = response.choices[0].message.content

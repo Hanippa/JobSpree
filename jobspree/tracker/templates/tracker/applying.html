@@ -13,13 +13,17 @@
               <td>{{ row.priority }} <a href="/delete-applying/{{row.id}}">X</a> </td>
             </tr>
     {% endfor %}
+
+      <form method="post" action="">{%csrf_token%}
+        <div class="form-container">
+          <td>{{form.company}}</td>
+            <td>{{form.keywords}}</td>
+              <td>{{form.priority}}</td>
+      </div>
+      <button type="submit">+</button>
+    </form>
     </table>
     
-    <form method="post" action="">{%csrf_token%}
-      <div class="form-container">
-      {{form}}
-    </div>
-    <button type="submit">+</button>
-  </form>
+
 
 {%endblock%}

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Applying , Applied , Interviews
+from datetime import date
 
 class applyingForm(forms.ModelForm):
     user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput() , required=False)
@@ -19,6 +20,7 @@ class appliedForm(forms.ModelForm):
         model = Applied
         fields = "__all__"
         exclude = ('user' ,)
+        widgets = {'date' : forms.DateInput(attrs={'type' : 'date'})}
     def __init__(self, *args, **kwargs):
         super(appliedForm, self).__init__(*args, **kwargs)
         self.fields['company'].label = ""
@@ -32,6 +34,7 @@ class interviewsForm(forms.ModelForm):
     class Meta:
         model = Interviews
         fields = ['company' , 'date' , 'result' , 'application' , 'score' ]
+        widgets = {'date' : forms.DateInput(attrs={'type' : 'date'})}
 
     def __init__(self, *args, **kwargs):
         fuser = kwargs.pop('user')
