@@ -2,18 +2,81 @@
 
 {%block content%}
 
-<h1>Total Applications : {{applied_count}}</h1>
+{% comment %} 
 <h1>Average Application Score <span id='average-score'>{{applied_score_avg}}</span></h1>
-<h1>Sucess Rate <span >{{success_rate}}%</span></h1>
-<div class='graph'>
-  <canvas id="applied_chart"></canvas>
+<h1>Average Interview Score <span id='average-score'>{{interviews_score_avg}}</span></h1>
+<h1>applied Sucess Rate <span >{{applied_success_rate}}%</span></h1>
+
+
+<h1>Average total Score <span id='average-score'>{{total_score_avg}}</span></h1>
+<h1>total Success Rate <span >{{total_success_rate}}%</span></h1> {% endcomment %}
+
+
+
+
+
+
+
+<div class="home-main-container">
+
+
+  <div class="applied-container">
+    
+    <h1>applications data</h1>
+    <div class='graph'>
+      <h3>total : {{applied_count}}</h3>
+      <h1 class="success_rate">{{applied_success_rate}}%</h1>
+      <canvas id="applied_chart"></canvas>
+    </div>
+    
+    <div class='graph'>
+      <h1 class="score_avg">{{applied_score_avg}}</h1>
+      <canvas id="applied_score_progression_graph"></canvas>
+    </div> 
+  </div>
+  <div class="interviews-container">
+    
+    <h1>interviews data</h1>
+    <div class='graph'>
+      <h3>total : {{interviews_count}}</h3>
+      <h1 class="success_rate">{{interviews_success_rate}}%</h1>
+      <canvas id="interviews_chart"></canvas>
+    </div>
+    <div class='graph'>
+      <h1 class="score_avg">{{interviews_score_avg}}</h1>
+      <canvas id="interview_score_progression_graph"></canvas>
+    </div>
+  </div>
+  
+  <div class="total-container">
+    <h1>total stats</h1>
+    <h2>success rate</h2>
+    <h1 class="total_success_rate">{{total_success_rate}}%</h1>
+    
+    <h2>average score</h2>
+    <h1 class="total_score_avg">{{total_score_avg}}</h1>
+
+
+  </div>
 </div>
-<div class='graph'>
-  <canvas id="interviews_chart"></canvas>
-</div>
-<div class='graph'>
-  <canvas id="interview_score_progression_graph"></canvas>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -97,6 +160,46 @@
     }
   });
   new Chart(interview_score_progression_graph, {
+    type: 'line',
+    
+    data: {
+      labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,
+      51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100],
+      datasets: [{
+        label: 'Score Progression',
+        data: {{interviews_scores}},
+        backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)'
+    ],
+    borderColor: [
+    'rgb(255, 99, 132)',
+    'rgb(255, 159, 64)',
+    'rgb(255, 205, 86)',
+    'rgb(75, 192, 192)',
+    'rgb(54, 162, 235)',
+    'rgb(153, 102, 255)',
+    'rgb(201, 203, 207)'
+  ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      
+      scales: {
+        x: {
+          type:'linear'
+        },
+        y:{beginAtZero: true}
+      }
+    }
+  });
+  new Chart(applied_score_progression_graph, {
     type: 'line',
     
     data: {

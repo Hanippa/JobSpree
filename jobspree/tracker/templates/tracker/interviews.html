@@ -16,12 +16,14 @@
               <td>{{ row.application }}</td>
               <td> 
 
-                <audio controls>
+                <audio controls class="audio">
                   <source src="{{row.recording}}" type="audio/mpeg">
                 Your browser does not support the audio element.
                 </audio> 
-                   <a href="/delete-interview/{{row.id}}">X</a>
-                   <a href="/interview/{{row.id}}">Page</a>
+                   <a class="line-info" href="/delete-interview/{{row.id}}"><span class="material-symbols-outlined">delete</span></a>
+                   <a class="line-info-expand" href="/interview/{{row.id}}"><span class="material-symbols-outlined">
+                    open_in_full
+                    </span></a>
                   </td>
             </tr>
     {% endfor %}
@@ -33,9 +35,11 @@
       <td>{{form.result}}</td>
       <td>{{form.score}}</td>
       <td >{{form.application}}</td>
-      <td> {{form.recording}}</td>
+      <td> {{form.recording}}<button class="add-button" type="submit"><span class="material-symbols-outlined">
+        add_circle
+        </span></button></td>
     </div>
-    <button type="submit">+</button>
+    
     
     
     </form>

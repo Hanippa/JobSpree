@@ -4,15 +4,16 @@
 
 {%block content%}
 
+<div class="main-container">
+<div class="auth-form-container">
 <form method="post" action="">{%csrf_token%}
 
-
-
-    <p>Don't have an accuont? Create one <a href="/sign-up">Here</a></p>
     {{form}}
     <button type="submit">Login</button>
+    <p>Don't have an accuont? Create one <a href="/sign-up">Here</a></p>
+    
 </form>
-
-
+</div>
+</div>
 
 {% endblock %}

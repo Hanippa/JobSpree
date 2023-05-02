@@ -34,7 +34,7 @@ class interviewsForm(forms.ModelForm):
     class Meta:
         model = Interviews
         fields = ['company' , 'date' , 'result' , 'application' , 'score' ]
-        widgets = {'date' : forms.DateInput(attrs={'type' : 'date'})}
+        widgets = {'date' : forms.DateInput(attrs={'type' : 'date'}) , 'score' : forms.NumberInput(attrs={'max' : '10' , 'min' : '0'})}
 
     def __init__(self, *args, **kwargs):
         fuser = kwargs.pop('user')

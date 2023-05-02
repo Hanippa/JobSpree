@@ -6,27 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>{%block title%}Job Spree{%endblock%}</title>
 </head>
 <body>
     <nav>
-        <img class="main-logo" src={% static '/images/JobSpreeLogo.svg' %} alt="logo">
-        <ul class="nav-right">
-            <li class="nav-item"><a href="/home">home</a></li>
-            <li class="nav-item"><a href="/applying">applying</a></li>
-            <li class="nav-item"><a href="/applied">applied</a></li>
-            <li class="nav-item"><a href="/interviews">interviews</a></li>
-
-        </ul>
-        <ul class="nav-left">
+        <div class="nav-left">
+        <a class="nav-item" href="/home"><img class="main-logo" src={% static '/images/JobSpreeLogo.svg' %} alt="logo"></a>
+            <h1 class="nav-item"><a href="/applying">applying goals</a></h1>
+            <h1 class="nav-item"><a href="/applied">applications</a></h1>
+            <h1 class="nav-item"><a href="/interviews">interviews</a></h1>
+    </div>
+    <div class="nav-right">
             {% if user.is_authenticated %}
-            <span>{{user.username}}</span>
-            <li class="nav-item"><a href="/logout">Log out</a></li>
+            
+            <a href="/logout"><img class="user-logo nav-item" src={% static '/images/userlogo.svg' %} alt="logo"></a>
             {%else%}
-            <li class="nav-item"><a href="/login">Login</a></li>
+            <h1 class="nav-item"><a href="/login">Login</a></h1>
             {%endif%}
-        </ul>
-
+            <h1 class="nav-item">{{user.username}}</h1>
+    </div>
     </nav>
     {%block content%}
 

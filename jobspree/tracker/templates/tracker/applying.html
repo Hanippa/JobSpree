@@ -10,17 +10,21 @@
             <tr>
               <td>{{ row.company }}</td>
               <td>{{ row.keywords }}</td>
-              <td>{{ row.priority }} <a href="/delete-applying/{{row.id}}">X</a> </td>
+              <td>{{ row.priority }} <a class="line-info" href="/delete-applying/{{row.id}}"><span class="material-symbols-outlined">delete</span></a> </td>
             </tr>
     {% endfor %}
 
       <form method="post" action="">{%csrf_token%}
         <div class="form-container">
+          <tr>
           <td>{{form.company}}</td>
-            <td>{{form.keywords}}</td>
-              <td>{{form.priority}}</td>
+          <td>{{form.keywords}}</td>
+          <td>{{form.priority}}<button class="add-button" type="submit"><span class="material-symbols-outlined">
+            add_circle
+            </span></button></td>
+        </tr>
       </div>
-      <button type="submit">+</button>
+      
     </form>
     </table>
     

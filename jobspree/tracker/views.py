@@ -7,42 +7,66 @@ import openai
 from .key import api_key
 import math
 
+
+
+
 def home(request):
     context = {}
-    applied = list(Applied.objects.filter(user = request.user).values())
-    interviews = list(Interviews.objects.filter(user = request.user).values())
+    applied = list(Applied.objects.filter(user = request.user).order_by('-date').values())
+    interviews = list(Interviews.objects.filter(user = request.user).order_by('-date').values())
 
-    applied_scores = []
-    for i in applied:
-        applied_scores .append(i['score'])
-    context['applied'] = applied
-    context['applied_scores'] = applied_scores
 
-    months = {'01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'9':0,'10':0,'11':0,'12':0}
+
+    applied_months = {'01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'9':0,'10':0,'11':0,'12':0}
+    interviews_months = {'01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'9':0,'10':0,'11':0,'12':0}
     
+    applied_scores = []
     applied_count = 0
     applied_sum = 0
-    success_rate = 0
+    applied_success_rate = 0
     for i in applied:
+        applied_scores.append(i['score'])
         applied_sum += i['score']
-        if i['score'] > 7:
-            success_rate += 1
+        if i['score'] >= 7:
+            applied_success_rate += 1
         applied_count += 1
-        months[i['date'].strftime("%m")] += 1
-    context['month_applied'] = list(months.values())
-    context['applied_score_avg'] ="%.2f" % (applied_sum/applied_count)
-    
-    
-    months = {'01':0,'02':0,'03':0,'04':0,'05':0,'06':0,'07':0,'08':0,'9':0,'10':0,'11':0,'12':0}
+        applied_months[i['date'].strftime("%m")] += 1
 
-
+    interviews_scores = []
+    interviews_count = 0
+    interviews_sum = 0
+    interviews_success_rate = 0
     for i in interviews:
-        months[i['date'].strftime("%m")] += 1
-    context['month_interviews'] = list(months.values())
+        interviews_scores.append(i['score'])
+        interviews_sum += i['score']
+        if i['score'] >= 7:
+            interviews_success_rate += 1
+        interviews_count += 1
+        interviews_months[i['date'].strftime("%m")] += 1
+    
+    
+    
+ 
 
-    context['success_rate'] = math.floor((success_rate/applied_count)*100)
+
+    context['applied_scores'] = applied_scores
+    context['interviews_scores'] = interviews_scores
+    context['month_interviews'] = list(interviews_months.values())
+    context['month_applied'] = list(applied_months.values())
+    context['applied_score_avg'] ="%.2f" % (applied_sum/applied_count)
+    context['interviews_score_avg'] ="%.2f" % (interviews_sum/interviews_count)
+    context['applied_success_rate'] = math.floor((applied_success_rate/applied_count)*100)
+    context['interviews_success_rate'] = math.floor((interviews_success_rate/interviews_count)*100)
     context['applied_count'] = applied_count
+    context['interviews_count'] = interviews_count
+
+    context['total_score_avg'] = "%.2f" % ((applied_sum + interviews_sum)/(applied_count + interviews_count))
+    context['total_success_rate'] = math.floor(((applied_success_rate + interviews_success_rate)/(applied_count + interviews_count))*100)
+
+
     return render(request, 'tracker/home.html' , context)
+
+
 
 def applying(request):
     if request.method == 'POST':
@@ -79,7 +103,7 @@ def applied(request):
     else:
         form = appliedForm()
     try:
-        applied_table = Applied.objects.filter(user = request.user).order_by('-score')
+        applied_table = Applied.objects.filter(user = request.user).order_by('-date')
     except:
         return redirect('/login')
     context ={'form':form ,'applied_table' :applied_table}
@@ -102,7 +126,7 @@ def interviews(request):
     else:
         form = interviewsForm(user=request.user)
     try:
-        interviews_table = Interviews.objects.filter(user = request.user).order_by('-score')
+        interviews_table = Interviews.objects.filter(user = request.user).order_by('-date')
     except:
         return redirect('/login')
     context ={'form':form ,'interviews_table' :interviews_table}

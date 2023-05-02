@@ -11,7 +11,7 @@
               <td>{{ row.company }}</td>
               <td>{{ row.date }}</td>
               <td>{{ row.result }}</td>
-              <td>{{ row.score }}<a href="/delete-applied/{{row.id}}">X</a><a href="/application/{{row.id}}">Page</a></td>
+              <td>{{ row.score }}<a class="line-info" href="/delete-applied/{{row.id}}"><span class="material-symbols-outlined">delete</span></a></td>
             </tr>
     {% endfor %}
 
@@ -25,7 +25,9 @@
       <td>{{form.score}}
 
 
-        <button type="submit">+</button>
+        <button class="add-button" type="submit"><span class="material-symbols-outlined">
+          add_circle
+          </span></button>
       </td>
       
     </div>
