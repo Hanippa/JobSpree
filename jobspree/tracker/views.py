@@ -217,7 +217,7 @@ def suggest(request , id):
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[
-            {"role": "user", "content": f'PLay the role of a career coach. based on the following tanscript from a recent interview i had, analyze in 4 sections my interviewee performance and suggest any ways i can improve(refer to the interviewee either as you or the user and the interviewer as interviewer)(keep it brief and simple to understand)(use terms like should have)(): {text} ',}
+            {"role": "user", "content": f"PLay the role of a career coach. Based on the following tanscript from a recent interview i had, analyze my interviewee performance and suggest any ways i can improve (this is the format you should follow: ['OVERVIEW: ' + overall analysis + 'AREA TO IMPROVE: ' +  in no more than three words say an area where the user needs to improve based on the interview + 'SUGGESTION: ' + here include a suggestion based previous area to improve section(this section should be repeated at least twice, more if there are more than 2 areas to improve) + 'AREA OF STRENGTH: ' + in no more than three words say the area where the user most demonstrated proficiency + 'FEEDBACK: ' + here include your feedback on the user poficiency area])(refer to the interviewee as the user and the interviewer as the interviewer)(keep it brief and simple to understand)(use terms like 'should have')transcript: {text} ",}
         ]
     )
     interview_to.suggestions = response.choices[0].message.content
