@@ -9,18 +9,20 @@ class applyingForm(forms.ModelForm):
         model = Applying
         fields = "__all__"
         exclude = ('user' ,)
+        widgets = {'priority' : forms.NumberInput(attrs={'max' : '10' , 'min' : '0'})}
     def __init__(self, *args, **kwargs):
         super(applyingForm, self).__init__(*args, **kwargs)
         self.fields['company'].label = ""
         self.fields['keywords'].label = ""
         self.fields['priority'].label = ""
+
 class appliedForm(forms.ModelForm):
     user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput() , required=False)
     class Meta:
         model = Applied
         fields = "__all__"
         exclude = ('user' ,)
-        widgets = {'date' : forms.DateInput(attrs={'type' : 'date'})}
+        widgets = {'date' : forms.DateInput(attrs={'type' : 'date'}), 'score' : forms.NumberInput(attrs={'max' : '10' , 'min' : '0'})}
     def __init__(self, *args, **kwargs):
         super(appliedForm, self).__init__(*args, **kwargs)
         self.fields['company'].label = ""

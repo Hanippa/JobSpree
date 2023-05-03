@@ -6,14 +6,16 @@ from .models import Applying , Applied , Interviews
 import openai
 from .key import api_key
 import math
+from django.contrib.auth.decorators import login_required
 
 
 
 
+@login_required(login_url='/login/')
 def home(request):
     context = {}
-    applied = list(Applied.objects.filter(user = request.user).order_by('-date').values())
-    interviews = list(Interviews.objects.filter(user = request.user).order_by('-date').values())
+    applied = list(Applied.objects.filter(user = request.user).order_by('date').values())
+    interviews = list(Interviews.objects.filter(user = request.user).order_by('date').values())
 
 
 
@@ -45,23 +47,43 @@ def home(request):
         interviews_months[i['date'].strftime("%m")] += 1
     
     
-    
- 
+    try:
+        context['total_score_avg'] = "%.2f" % ((applied_sum + interviews_sum)/(applied_count + interviews_count))
+    except:
+        context['total_score_avg'] = 0
+    try:
+        context['total_success_rate'] = math.floor(((applied_success_rate + interviews_success_rate)/(applied_count + interviews_count))*100)
+    except:
+        context['total_success_rate'] = 0
+    try:
+        context['applied_score_avg'] ="%.2f" % (applied_sum/applied_count)
+    except:
+        context['applied_score_avg'] = 0
+    try:
+        context['interviews_score_avg'] ="%.2f" % (interviews_sum/interviews_count)
+    except:
+        context['interviews_score_avg'] = 0
+    try:
+        context['applied_success_rate'] = math.floor((applied_success_rate/applied_count)*100)
+    except:
+        context['applied_success_rate'] = 0
+    try:
+        context['interviews_success_rate'] = math.floor((interviews_success_rate/interviews_count)*100)
+    except:
+        context['interviews_success_rate'] = 0
+        
+        
 
 
     context['applied_scores'] = applied_scores
     context['interviews_scores'] = interviews_scores
     context['month_interviews'] = list(interviews_months.values())
     context['month_applied'] = list(applied_months.values())
-    context['applied_score_avg'] ="%.2f" % (applied_sum/applied_count)
-    context['interviews_score_avg'] ="%.2f" % (interviews_sum/interviews_count)
-    context['applied_success_rate'] = math.floor((applied_success_rate/applied_count)*100)
-    context['interviews_success_rate'] = math.floor((interviews_success_rate/interviews_count)*100)
+
     context['applied_count'] = applied_count
     context['interviews_count'] = interviews_count
 
-    context['total_score_avg'] = "%.2f" % ((applied_sum + interviews_sum)/(applied_count + interviews_count))
-    context['total_success_rate'] = math.floor(((applied_success_rate + interviews_success_rate)/(applied_count + interviews_count))*100)
+
 
 
     return render(request, 'tracker/home.html' , context)
@@ -195,7 +217,7 @@ def suggest(request , id):
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[
-            {"role": "user", "content": f'The following is a transcript of a interview I did: {text} based on this transcript list several ways I can improve my interview performence'},
+            {"role": "user", "content": f'PLay the role of a career coach. based on the following tanscript from a recent interview i had, analyze in 4 sections my interviewee performance and suggest any ways i can improve(refer to the interviewee either as you or the user and the interviewer as interviewer)(keep it brief and simple to understand)(use terms like should have)(): {text} ',}
         ]
     )
     interview_to.suggestions = response.choices[0].message.content

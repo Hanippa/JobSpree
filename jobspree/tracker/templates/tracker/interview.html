@@ -31,17 +31,28 @@
                       <div class="info-header">
                         Transcription
                       </div>
-                      <audio controls>
-                        <source src="../{{interview.recording}}" type="audio/mpeg">
-                      Your browser does not support the audio element.
-                      </audio> 
-                      <a href="/transcribe/{{interview.id}}">Generate Transcript</a>
-                      <div class="transcript">
-                      {{interview.transcript}}
-                      <br>
-                      <a href="/suggest/{{interview.id}}">Generate Suggestions</a>
-                      {{interview.suggestions}}
-                    </div>
+
+
+                      <div class="info-transcript">
+                          <audio controls>
+                            <source src="../{{interview.recording}}" type="audio/mpeg">
+                          Your browser does not support the audio element.
+                          </audio> 
+                          <a class="generate-icon" href="/transcribe/{{interview.id}}"><span class="material-symbols-outlined">
+                            generating_tokens
+                            </span></a>
+                        
+                        
+                          {{interview.transcript}}
+                        </div>
+                        <div class="info-suggestions">
+                          {{interview.suggestions}}
+                          <a class="generate-icon" href="/suggest/{{interview.id}}"><span class="material-symbols-outlined">
+                            assistant
+                            </span></a>
+                        </div>
+
+
                     </div>
 
 
