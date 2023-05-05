@@ -130,7 +130,8 @@ def applied(request):
         return redirect('/login')
     context ={'form':form ,'applied_table' :applied_table}
     return render(request, 'tracker/applied.html', context)
-
+    
+@login_required(login_url='/login/')
 def interviews(request):
     if request.method == 'POST':
         form = interviewsForm(request.POST , request.FILES , user=request.user)

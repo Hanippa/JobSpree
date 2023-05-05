@@ -8,10 +8,14 @@
 <form method="post" action="">{%csrf_token%}
 
 
-
-    <p>Already have an accuont? Login <a href="/login">Here</a></p>
-    {{form}}
+    <label for="id_username">Username:</label>
+    {{form.username}}
+    <label for="id_username">Password:</label>
+    {{form.password1}}
+    <label for="id_username">Password Confirmation:</label>
+    {{form.password2}}
     <button type="submit">Register</button>
+    <p>Already have an accuont? Login <a href="/login">Here</a></p>
 </form>
 </div>
 </div>

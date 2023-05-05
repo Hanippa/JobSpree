@@ -3,7 +3,7 @@ html{
 }
 a{
     text-decoration: none;
-    color: black;
+    color: #272838;
 }
 *{
     margin:0;
@@ -218,8 +218,23 @@ table {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    overflow: scroll;
+    overflow-y: scroll;
+    scrollbar-color:#272838 #dfdfdf ;
+    scrollbar-width: thin;
 
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background:#dfdfdf;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #272838; 
+    border-radius: 10px;
   }
   .generate-icon{
     position: absolute;
@@ -333,14 +348,24 @@ table {
 
 .auth-form-container label{
   font-size: 30px;
-  color: rgb(173, 173, 173);
+  color: #272838;
 }
 .auth-form-container button{
   font-size: 30px;
-  color: rgb(173, 173, 173);
+  color: #272838;
  width: 100%;
  height: 70px;
  margin-top: 20%;
 }
   
-  
+.auth-form-container input{
+margin: 20px;
+height: 30px;
+font-size: 20px;
+border-bottom: #27283844 2px solid;
+font-family: 'Readex Pro', sans-serif;
+color: #272838;
+}
+.auth-form-container button{
+  font-family: 'Readex Pro', sans-serif;
+  }

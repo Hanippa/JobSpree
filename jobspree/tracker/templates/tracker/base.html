@@ -16,9 +16,13 @@
     <nav>
         <div class="nav-left">
         <a class="nav-item" href="/home"><img class="main-logo" src={% static '/images/JobSpreeLogo.svg' %} alt="logo"></a>
+            {% if user.is_authenticated %}
             <h1 class="nav-item"><a href="/applying">applying goals</a></h1>
             <h1 class="nav-item"><a href="/applied">applications</a></h1>
             <h1 class="nav-item"><a href="/interviews">interviews</a></h1>
+            {% else %}
+            <h1 class="nav-item">JobSpree</h1>
+            {% endif %}
     </div>
     <div class="nav-right">
             {% if user.is_authenticated %}
