@@ -3,36 +3,19 @@ html{
 }
 a{
     text-decoration: none;
-    color: var(--text-color) ;
+    color: #272838;
 }
 *{
     margin:0;
-    color : var(--text-color) ;
-    
+    color : #272838;
 }
 
 
-body{
- --background-color : #ffffff;
- --object-color : #f9f8f8 ;
-  --text-color : #272838 ;
-  --table-border-color : #dddddd;
-  background-color: var(--background-color);
-  
-}
-
-body.dark{
-  --background-color : #181a1b;
-  --text-color : #c9c5bd;
-  --object-color : #1c1e1f;
-  --table-border-color : #3a3e41;
-    background-color: var(--background-color);
-}
 
 nav{
   width: 100%;
   height: 90px;
-    background-color: var(--object-color) ;
+    background-color: #F9F8F8;
     display: flex;
 }
 .main-logo{
@@ -73,7 +56,7 @@ margin: 20px;
 .interviews-container{
   width: 40%;
   height: 95%;
-  background-color: var(--object-color) ;
+  background-color: #F9F8F8;
   margin: 20px;
   border-radius: 30px;
   display: flex;
@@ -95,7 +78,7 @@ margin: 20px;
 }
 .success_rate , .score_avg{
   position: absolute;
-  background-color: var(--object-color) ;
+  background-color: #F9F8F8;
   text-align: center;
   padding-top: 15px;
   border-radius: 100px;
@@ -106,7 +89,7 @@ margin: 20px;
   top: 140px;
 }
 .total_success_rate , .total_score_avg{
-  background-color: var(--object-color) ;
+  background-color: #F9F8F8;
   text-align: center;
   padding-top: 40px;
   border-radius: 100px;
@@ -128,7 +111,7 @@ margin: 20px;
 .applied-container{
   width: 40%;
   height: 95%;
-  background-color: var(--object-color) ;
+  background-color: #F9F8F8;
   margin: 20px;
   border-radius: 30px;
   display: flex;
@@ -138,7 +121,7 @@ margin: 20px;
 .total-container{
   width: 20%;
   height: 95%;
-  background-color: var(--object-color) ;
+  background-color: #F9F8F8;
   margin: 20px;
   border-radius: 30px;
   display: flex;
@@ -169,7 +152,7 @@ table {
   }
   
   td, th {
-    border: 1px solid var(--table-border-color);
+    border: 1px solid #dddddd;
     text-align: left;
     width: 20%;
     padding: 8px;
@@ -177,7 +160,7 @@ table {
   }
   
   tr:nth-child(even) {
-    background-color: var(--object-color) ;
+    background-color: #f9f8f8;
   }
 
   .form-container{
@@ -198,7 +181,7 @@ table {
   }
 
   .info-container{
-    background-color: var(--object-color) ;
+    background-color: #f9f8f8;
     height: 90%;
     width: 80%;
     border-radius: 40px;
@@ -216,7 +199,7 @@ table {
   .info-container-right{
     width: 50%;
     height: 100%;
-    border-left: var(--text-color)  2px solid;
+    border-left: #272838 2px solid;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -225,7 +208,7 @@ table {
   margin: 20px;
 }
   .info-transcript{
-    background-color: var(--background-color) ;
+    background-color: white;
     width:90%;
     height: 45%;
     margin: 20px;
@@ -236,7 +219,7 @@ table {
     align-items: center;
     padding: 20px;
     overflow-y: scroll;
-    scrollbar-color:var(--text-color)  #dfdfdf ;
+    scrollbar-color:#272838 #dfdfdf ;
     scrollbar-width: thin;
 
   }
@@ -250,7 +233,7 @@ table {
   }
   
   ::-webkit-scrollbar-thumb {
-    background: var(--text-color) ; 
+    background: #272838; 
     border-radius: 10px;
   }
   .generate-icon{
@@ -260,7 +243,7 @@ table {
     margin: 20px;
   }
   .info-suggestions{
-    background-color: var(--background-color) ;
+    background-color: white;
     width: 90%;
     height: 45%;
     margin: 20px;
@@ -274,7 +257,7 @@ table {
   .info-header{
     font-size: 70px;
     text-align: center;
-    border-bottom: var(--text-color)  4px solid;
+    border-bottom: #272838 4px solid;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -323,14 +306,14 @@ table {
     width: 100%;
     height: 15px;
     border: none;
-    border-bottom: var(--text-color)  2px solid;
+    border-bottom: #272838 2px solid;
     background-color: #dddddd00;
   }
   input , select{
     width: 100%;
     border: none;
     border: none;
-    border-bottom: var(--text-color)  2px solid;
+    border-bottom: #272838 2px solid;
     border-radius: 3px;
     background-color: none;
     background-color: #dddddd00;
@@ -351,7 +334,7 @@ table {
 
 
 .auth-form-container{
-  background-color: var(--object-color) ;
+  background-color: #f9f8f8;
   width:50%;
   height: 70%;
   padding: 40px;
@@ -365,14 +348,11 @@ table {
 
 .auth-form-container label{
   font-size: 30px;
-  color: var(--text-color) ;
+  color: #272838;
 }
 .auth-form-container button{
   font-size: 30px;
-  color: var(--text-color) ;
-  background-color: var(--background-color);
-  border: none;
-  border-radius: 30px;
+  color: #272838;
  width: 100%;
  height: 70px;
  margin-top: 20%;
@@ -382,30 +362,10 @@ table {
 margin: 20px;
 height: 30px;
 font-size: 20px;
-border-bottom: rgb(185, 185, 185) 2px solid;
+border-bottom: #27283844 2px solid;
 font-family: 'Readex Pro', sans-serif;
-color: var(--text-color) ;
+color: #272838;
 }
 .auth-form-container button{
   font-family: 'Readex Pro', sans-serif;
   }
-.color-mode-toggle{
-  border: none;
-  background-color: #dddddd00;
-}
-@media only screen and (max-width: 1500px) {
-  *{
-    overflow: hidden;
-  }
-  body:after {
-    background-color: lightcoral;
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    top : 0px;
-    left :0px;
-    content: 'Currently not available for your screen size, sorry.';
-    color: white;
-    font-size: 50px;
-  }
-}

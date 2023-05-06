@@ -1,4 +1,4 @@
-import environ
+import os
 from pathlib import Path
 
 
@@ -11,7 +11,8 @@ SECRET_KEY = 'django-insecure-e@kdsswqbh7h4q&+4$6f=ufl26q6fra2rs%z6q$1js2r$gff(_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['jobspree.me' , 'www.jobspree.me']
 
 
 # Application definition
@@ -62,14 +63,11 @@ WSGI_APPLICATION = 'jobspree.wsgi.application'
 
 DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'jobspree',
-            'USER': 'postgres',
-            'PASSWORD': '2144',
-            'HOST': 'localhost',
-            'PORT': '5432',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR/'db.sqlite3',
         }
     }
+
 
 
 # Password validation
@@ -108,9 +106,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
-STATICFILES_DIRS = ('static',)
+MEDIA_URL = 'media/'
+
+# STATICFILES_DIRS = ('/static',)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -118,3 +118,4 @@ STATICFILES_DIRS = ('static',)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/login'
+
