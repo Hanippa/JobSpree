@@ -1,12 +1,26 @@
 {%extends 'tracker/base.html'%}
-
+{%block print%}
+<button class="print">
+  <span class="material-symbols-outlined">
+      print
+      </span>
+  </button>
+{%endblock%}
 {%block content%}
 
 
 
-  <table summary="no_orderDate">
+  <table class="main-table">
 
-    <tr><th>Company</th><th>Date</th><th>Result<th>Score</th><th>Application</th><th>Recording</th></th>
+    <tr class="table-header">
+      <th>company <span class="material-symbols-outlined">apartment</span></th>
+      <th>date <span class="material-symbols-outlined">calendar_month</span></th>
+      <th>result <span class="material-symbols-outlined">format_list_numbered_rtl</span></th>
+      <th>score <span class="material-symbols-outlined">sports_score</span></th>
+      <th>application <span class="material-symbols-outlined">approval</span></th>
+      <th>recording <span class="material-symbols-outlined">music_video</span></th>
+      <th></th>
+    </tr>
     {% for row in interviews_table %}
             <tr>
               <td>{{ row.company }}</td>
@@ -14,14 +28,20 @@
               <td>{{ row.result }}</td>
               <td>{{ row.score }}</td>
               <td>{{ row.application }}</td>
+              
               <td> 
-
+              {% if row.application %}
                 <audio controls class="audio">
                   <source src="{{row.recording}}" type="audio/mpeg">
                 Your browser does not support the audio element.
                 </audio> 
-                   <a class="line-info" href="/delete-interview/{{row.id}}"><span class="material-symbols-outlined">delete</span></a>
-                   <a class="line-info-expand" href="/interview/{{row.id}}"><span class="material-symbols-outlined">
+                {% else %}
+                <span>no interview recording</span>
+                {% endif %}
+              </td>
+              <td>
+                   <a class="line-info" href="/delete-interview/{{row.id}}"><span class="material-symbols-outlined delete">delete</span></a>
+                   <a class="line-info-expand" href="/interview/{{row.id}}"><span class="material-symbols-outlined expand">
                     open_in_full
                     </span></a>
                   </td>
@@ -30,13 +50,15 @@
 
     <form method="post" action="" enctype="multipart/form-data">{%csrf_token%}
       <div class="form-container">
-        <tr>
+        <tr class="table-form">
         <td>{{form.company}}</td>
       <td> {{form.date}}</td>
       <td>{{form.result}}</td>
       <td>{{form.score}}</td>
       <td >{{form.application}}</td>
-      <td> {{form.recording}}<button class="add-button" type="submit"><span class="material-symbols-outlined">
+      <td> {{form.recording}}</td>
+      <td>
+        <button class="add-button" type="submit"><span class="material-symbols-outlined">
         add_circle
         </span></button></td>
       </tr>

@@ -1,0 +1,37 @@
+
+{%extends 'tracker/base.html'%}
+{% load static %}
+
+{%block content%}
+<script src="https://unpkg.com/swup@3"></script>
+<main id="swup" class="transition-fade">
+<div class="landing-main-container">
+
+    <div class="landing-container-left">
+        <h1 class="landing-title">Take charge of your job search</h1>
+        <h1 class="landing-subtitle">join us and make your job searching journey better with our tracker and an AI interview analysis tool.</h1>
+        <a href="/sign-up" class="landing-signup-button">sign up</a>
+        
+
+        <div class="landing-socials">
+            <a class="social-a" target="_blank" href="https://github.com/Hanippa/Jobspree"><img class="github-logo social" src={% static '/images/github-mark.svg' %} alt="github"></a>
+            <a class="social-a" target="_blank" href="https://www.youtube.com/watch?v=15Rdn5muCsY"> <img class="youtube-logo social" src={% static '/images/youtube.svg' %} alt="youtube"> </a>
+            <a class="social-a" target="_blank" href="https://www.linkedin.com/in/dekel-matslich-8b7b28264/"><img class="linkedin-logo social" src={% static '/images/linkedin.svg' %} alt="linkedin"></a>
+        </div>
+
+    </div>
+    <div class="landing-container-right">
+        <div class="landing-logo-shadow">
+
+            <img class="landing-logo" src={% static '/images/JobSpreeLogoLanding.svg' %} alt="logo">
+
+        </div>
+        
+        
+    </div>
+</div>
+</main>
+<script>
+const swup = new Swup({animateHistoryBrowsing: true});
+</script>
+{% endblock %}

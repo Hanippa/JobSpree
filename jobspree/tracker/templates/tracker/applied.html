@@ -1,17 +1,30 @@
 {%extends 'tracker/base.html'%}
-
+{%block print%}
+<button class="print">
+  <span class="material-symbols-outlined">
+      print
+      </span>
+  </button>
+{%endblock%}
 {%block content%}
 
 
-
-  <table summary="no_orderDate">
-    <tr><th>Company</th><th>Date</th><th>Result<th>Score</th></th>
+<div class="table-container">
+  <table class="main-table">
+    <tr class="table-header">
+      <th>company <span class="material-symbols-outlined">apartment</span></th>
+      <th>date <span class="material-symbols-outlined">calendar_month</span></th>
+      <th>result <span class="material-symbols-outlined">format_list_numbered_rtl</span></th>
+      <th>score <span class="material-symbols-outlined">sports_score</span></th>
+      <th></th>
+    </tr>
     {% for row in applied_table %}
             <tr>
               <td>{{ row.company }}</td>
               <td>{{ row.date }}</td>
               <td>{{ row.result }}</td>
-              <td>{{ row.score }}<a class="line-info" href="/delete-applied/{{row.id}}"><span class="material-symbols-outlined">delete</span></a></td>
+              <td>{{ row.score }}</td>
+              <td><a class="line-info" href="/delete-applied/{{row.id}}"><span class="material-symbols-outlined delete">delete</span></a></td>
             </tr>
     {% endfor %}
 
@@ -19,13 +32,13 @@
 
     <form method="post" action="">{%csrf_token%}
       <div class="form-container">
-      <tr>
+      <tr class="table-form">
       <td>{{form.company}}</td>
       <td>{{form.date}}</td>
       <td>{{form.result}}</td>
-      <td>{{form.score}}
+      <td>{{form.score}}</td>
       
-
+        <td>
         <button class="add-button" type="submit"><span class="material-symbols-outlined">
           add_circle
           </span></button>
@@ -36,6 +49,6 @@
   </form>
     </table>
     
-
+  </div>
 
 {%endblock%}

@@ -3,17 +3,24 @@
 {%block title%}Login{% endblock %}
 
 {%block content%}
-
+<script src="https://unpkg.com/swup@3"></script>
+<main id="swup" class="transition-fade">
 <div class="main-container">
 <div class="auth-form-container">
 <form method="post" action="">{%csrf_token%}
-
+    <h1 class="login-title">account login</h1>
+    <h2 class="login-subtitle">good luck on your job searching journey!</h2>
     {{form}}
-    <button type="submit">Login</button>
-    <p>Don't have an accuont? Create one <a href="/sign-up">Here</a></p>
+    <div class="button-con">
+    <button type="submit">login to account</button>
+    </div>
+    <p>dont have an account? <a href="/sign-up">sign up</a></p>
     
 </form>
 </div>
 </div>
-
+</main>
+<script>
+    const swup = new Swup({animateHistoryBrowsing: true});
+    </script>
 {% endblock %}

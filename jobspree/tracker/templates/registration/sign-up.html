@@ -3,22 +3,29 @@
 {%block title%}Sign Up{% endblock %}
 
 {%block content%}
+<script src="https://unpkg.com/swup@3"></script>
+<main id="swup" class="transition-fade">
 <div class="main-container">
 <div class="auth-form-container">
 <form method="post" action="">{%csrf_token%}
 
-
-    <label for="id_username">Username:</label>
+    <h1 class="signup-title">create an account</h1>
+    <h2 class="signup-subtitle">create an account to enjoy job spree completely free of charge!</h2>
+    <label for="id_username">username:</label>
     {{form.username}}
-    <label for="id_username">Password:</label>
+    <label for="id_username">password:</label>
     {{form.password1}}
-    <label for="id_username">Password Confirmation:</label>
+    <label for="id_username">password confirmation:</label>
     {{form.password2}}
-    <button type="submit">Register</button>
-    <p>Already have an accuont? Login <a href="/login">Here</a></p>
+    <div class="button-con">
+    <button type="submit">create account</button>
+</div>
+    <p>already have an account? <a href="/login">sign in</a></p>
 </form>
 </div>
 </div>
-
-
+</main>
+<script>
+    const swup = new Swup({animateHistoryBrowsing: true});
+    </script>
 {% endblock %}

@@ -1,10 +1,10 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,46 +12,67 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>{%block title%}Job Spree{%endblock%}</title>
 </head>
-<body class="">
+<body class="" >
+    <script>
+        if (localStorage.getItem('isDarkMode') === 'true') {
+            document.body.classList.toggle('dark')
+    }
+</script>
     <nav>
         <div class="nav-left">
-        <a class="nav-item" href="/home"><img class="main-logo" src={% static '/images/JobSpreeLogo.svg' %} alt="logo"></a>
+        <a class="nav-item main-logo" href="/home"><img class="main-logo" src={% static '/images/JobSpreeLogo.svg' %} alt="logo"></a>
             {% if user.is_authenticated %}
+            <h1 class="nav-item home"><a href="/home">home</a></h1>
             <h1 class="nav-item"><a href="/applying">applying goals</a></h1>
             <h1 class="nav-item"><a href="/applied">applications</a></h1>
             <h1 class="nav-item"><a href="/interviews">interviews</a></h1>
+            
             {% else %}
             <h1 class="nav-item">JobSpree</h1>
             {% endif %}
+            
     </div>
     <div class="nav-right">
 
             {% if user.is_authenticated %}
-            
-            <a href="/logout"><img class="user-logo nav-item" src={% static '/images/userlogo.svg' %} alt="logo"></a>
-            {%else%}
-            <h1 class="nav-item"><a href="/login">Login</a></h1>
-            {%endif%}
             <h1 class="nav-item">{{user.username}}</h1>
+            <a href="/logout"><span class="material-symbols-outlined logout">
+                logout
+                </span></a>
+                <a href="#" id="menu-button" class="menu"><span class="material-symbols-outlined">menu</span></a>
+            {%else%}
+            <h1 class="nav-item"><a href="/login">login</a></h1>
+            {%endif%}
+
+
             <button class="color-mode-toggle">
                 <span id="color-toggle" class="material-symbols-outlined">
                 dark_mode
                 </span>
+
             </button>
+            {%block print%}
+
+            {%endblock%}
     </div>
     </nav>
-    {%block content%}
+   
+            {%block content%}
 
-    {%endblock%}
+            {%endblock%}
+      
+            
 </body>
+
 <script>
-    
-     if (localStorage.getItem('isDarkMode') === 'true') {
-        document.body.classList.toggle('dark')
+
+
+    if (localStorage.getItem('isDarkMode') === 'true') {
         document.querySelector('#color-toggle').innerHTML = 'light_mode'
-} 
-    
-    document.querySelector('#color-toggle').addEventListener('click' , () => {document.body.classList.toggle('dark');
+}
+
+    document.querySelector('#color-toggle').addEventListener('click' , () => {
+    document.body.classList.toggle('dark');
     if (localStorage.getItem('isDarkMode') === 'true') {
 
     localStorage.setItem('isDarkMode', false)
@@ -63,6 +84,17 @@
     };
     
     ;})
+    const menubutton = document.getElementById('menu-button')
+    const menu = document.getElementsByClassName('nav-left')[0]
+    
+    menubutton.addEventListener('click' , () => {
+        menu.classList.toggle('active')
 
+    });
+    document.querySelector('.print').addEventListener('click' , () => {
+        window.print();
+    });
+    
 </script>
+
 </html>

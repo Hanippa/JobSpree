@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-e@kdsswqbh7h4q&+4$6f=ufl26q6fra2rs%z6q$1js2r$gff(_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 # ALLOWED_HOSTS = ['jobspree.me' , 'www.jobspree.me']
 
 
@@ -106,7 +106,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
 
 MEDIA_URL = 'media/'
 

@@ -11,7 +11,15 @@ from django.contrib.auth.decorators import login_required
 
 
 
-@login_required(login_url='/login/')
+
+# landing page view
+def landing(request):
+    return render(request, 'tracker/landing.html')
+
+
+
+# home page view
+@login_required(login_url='/landing')
 def home(request):
     context = {}
     applied = list(Applied.objects.filter(user = request.user).order_by('date').values())
@@ -90,6 +98,7 @@ def home(request):
 
 
 
+# applying goals view
 def applying(request):
     if request.method == 'POST':
         form = applyingForm(request.POST)
@@ -110,6 +119,9 @@ def applying(request):
     context ={'form':form ,'applying_table' :applying_table}
     return render(request, 'tracker/applying.html', context)
 
+
+
+#applied view
 def applied(request):
     if request.method == 'POST':
         form = appliedForm(request.POST)
@@ -131,6 +143,8 @@ def applied(request):
     context ={'form':form ,'applied_table' :applied_table}
     return render(request, 'tracker/applied.html', context)
     
+
+#interviews view
 @login_required(login_url='/login/')
 def interviews(request):
     if request.method == 'POST':
@@ -141,7 +155,10 @@ def interviews(request):
             result = form.cleaned_data['result']
             score = form.cleaned_data['score']
             application = form.cleaned_data['application']
-            recording = request.FILES['recording']
+            try:
+                recording = request.FILES['recording']
+            except:
+                recording = ""
             user = request.user
             new_interview = Interviews(user = user ,company = company , date = date , result = result ,  score = score , application = application , recording = recording)
             new_interview.save()
@@ -155,12 +172,9 @@ def interviews(request):
     context ={'form':form ,'interviews_table' :interviews_table}
     return render(request, 'tracker/interviews.html', context)
 
-def application(request , id):
-    context = {}
-    context['application'] = Applied.objects.get(id = id)
-    return render(request, 'tracker/application.html' , context)
 
 
+#specific interview view
 def interview(request , id):
     context = {}
     context['interview'] = Interviews.objects.get(id = id)
@@ -179,6 +193,8 @@ def sign_up(request):
     return render(request , 'registration/sign-up.html' , {'form':form})
 
 
+
+#delete views
 def delete_applied(request , id):
     item = Applied.objects.get(id = id)
     item.delete()
@@ -194,6 +210,10 @@ def delete_interview(request , id):
     item.delete()
     return redirect('/interviews')
 
+
+
+
+#generate transript for spesific interview view
 def transcribe(request , id):
     API_KEY = api_key
     model_id = 'whisper-1'
@@ -209,7 +229,7 @@ def transcribe(request , id):
     interview_to.save()
     return redirect(f'/interview/{id}')
 
-
+#generate suggestions for spesific interview view
 def suggest(request , id):
     openai.api_key = api_key
     interview_to = Interviews.objects.get(id = id)
@@ -217,6 +237,8 @@ def suggest(request , id):
 
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
+
+    #chatgpt prompt
     messages=[
             {"role": "user", "content": f"PLay the role of a career coach. Based on the following tanscript from a recent interview i had, analyze my interviewee performance and suggest any ways i can improve (this is the format you should follow: ['OVERVIEW: ' + overall analysis + 'AREA TO IMPROVE: ' +  in no more than three words say an area where the user needs to improve based on the interview + 'SUGGESTION: ' + here include a suggestion based previous area to improve section(this section should be repeated at least twice, more if there are more than 2 areas to improve) + 'AREA OF STRENGTH: ' + in no more than three words say the area where the user most demonstrated proficiency + 'FEEDBACK: ' + here include your feedback on the user poficiency area])(refer to the interviewee as the user and the interviewer as the interviewer)(keep it brief and simple to understand)(use terms like 'should have')transcript: {text} ",}
         ]

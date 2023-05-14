@@ -1,33 +1,51 @@
 {%extends 'tracker/base.html'%}
-
+{%block print%}
+<button class="print">
+  <span class="material-symbols-outlined">
+      print
+      </span>
+  </button>
+{%endblock%}
 {%block content%}
 
 
+<div class="table-container"></div>
+  <table class="main-table">
 
-  <table summary="no_orderDate">
-    <tr><th>Company</th><th>Keywords<th>Priority</th></th>
+
+    <tr class="table-header">
+      <th>company <span class="material-symbols-outlined">apartment</span></th>
+      <th>keywords <span class="material-symbols-outlined">summarize</span></th>
+      <th>priority <span class="material-symbols-outlined">low_priority</span></th>
+      <th></th>
+    </tr>
+
+
     {% for row in applying_table %}
             <tr>
               <td>{{ row.company }}</td>
               <td>{{ row.keywords }}</td>
-              <td>{{ row.priority }} <a class="line-info" href="/delete-applying/{{row.id}}"><span class="material-symbols-outlined">delete</span></a> </td>
+              <td>{{ row.priority }}</td>
+              <td><a class="line-info" href="/delete-applying/{{row.id}}"><span class="material-symbols-outlined delete">delete</span></a></td>
             </tr>
     {% endfor %}
-
+    <div class="form-container">
       <form method="post" action="">{%csrf_token%}
-        <div class="form-container">
-          <tr>
+        
+          <tr class="table-form">
           <td>{{form.company}}</td>
           <td>{{form.keywords}}</td>
-          <td>{{form.priority}}<button class="add-button" type="submit"><span class="material-symbols-outlined">
+          <td>{{form.priority}}</td>
+          <td><button class="add-button" type="submit"><span class="material-symbols-outlined">
             add_circle
             </span></button></td>
         </tr>
-      </div>
+      
       
     </form>
+  </div>
     </table>
     
 
-
+</div>
 {%endblock%}
