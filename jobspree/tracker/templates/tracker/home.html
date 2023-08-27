@@ -3,46 +3,51 @@
 {%block content%}
 
 
-
-
-
 <div class="home-main-container">
-
+<!-- New home.html -->
 
   <div class="applied-container">
     
-    <h1>applications data</h1>
+    <h1 class="h1-title">applications data</h1>
     <div class='graph'>
       <h3>total : {{applied_count}}</h3>
       <h1 class="success_rate">{{applied_success_rate}}%</h1>
+      <div class="chart-container">
       <canvas id="applied_chart"></canvas>
+      </div>
     </div>
     
     <div class='graph'>
       <h1 class="score_avg">{{applied_score_avg}}</h1>
+      <div class="chart-container">
       <canvas id="applied_score_progression_graph"></canvas>
+    </div>
     </div> 
   </div>
   <div class="interviews-container">
     
-    <h1>interviews data</h1>
+    <h1 class="h1-title">interviews data</h1>
     <div class='graph'>
       <h3>total : {{interviews_count}}</h3>
       <h1 class="success_rate">{{interviews_success_rate}}%</h1>
+      <div class="chart-container">
       <canvas id="interviews_chart"></canvas>
+    </div> 
     </div>
     <div class='graph'>
       <h1 class="score_avg">{{interviews_score_avg}}</h1>
+      <div class="chart-container">
       <canvas id="interview_score_progression_graph"></canvas>
+    </div>
     </div>
   </div>
   
   <div class="total-container">
-    <h1>total stats</h1>
-    <h2>success rate</h2>
+    <h1 class="h1-title">total stats</h1>
+    <h2 class="h1-title">success rate</h2>
     <h1 class="total_success_rate">{{total_success_rate}}%</h1>
     
-    <h2>average score</h2>
+    <h2  class="h1-title">average score</h2>
     <h1 class="total_score_avg">{{total_score_avg}}</h1>
 
 

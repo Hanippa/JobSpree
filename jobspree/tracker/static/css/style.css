@@ -14,6 +14,7 @@ a{
 
 
 body{
+
   padding-top: 90px;
  --background-color : #ffffff;
  --object-color : #f9f8f8 ;
@@ -21,6 +22,12 @@ body{
   --table-border-color : #dddddd;
   background-color: var(--background-color);
   
+}
+.chart-container{
+  
+  position: relative;
+  width:25vw;
+  height: auto;
 }
 .table-header{
   position: sticky;
@@ -84,47 +91,51 @@ margin: 20px;
   margin: 20px;
   border-radius: 30px;
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
   overflow-x: auto;
   overflow-y: hidden;
 }
 .interviews-container h1{
-  margin: 30px;
+  margin-top: 30px;
 }
-.total-container h1{
-  margin: 50px;
-}
+
 .applied-container h1{
-  margin: 30px;
+  margin-top: 30px;
 }
 .graph{
-  margin: 40px;
+  margin: 2em;
   position: relative;
 }
 .success_rate , .score_avg{
+  font-size:1.3vw;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--object-color) ;
   text-align: center;
-  padding-top: 15px;
+  padding: 0.3em;
+  width: 2.4vw;
+  height: 2.4vw;
   border-radius: 100px;
   border: solid 10px #EB9486;
-  width: 70px;
-  height: 55px;
-  right: -80px;
-  top: 140px;
+  right: -4em;
+  top: -1em;
 }
 .total_success_rate , .total_score_avg{
   background-color: var(--object-color) ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding-top: 40px;
+  padding: 1em;
   border-radius: 100px;
   border: solid 20px #EB9486;
-  width: 160px;
-  height: 120px;
-  right: -80px;
-  top: -30px;
-  font-size: 60px;
+  width:3vw;
+  height: 3vw;
+  font-size: 2vw;
 }
 
 .total_score_avg{
@@ -142,6 +153,7 @@ margin: 20px;
   border-radius: 30px;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   flex-direction: column;
   overflow-x: auto;
   overflow-y: hidden;
@@ -154,6 +166,7 @@ margin: 20px;
   border-radius: 30px;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   flex-direction: column;
   overflow-x: auto;
   overflow-y: hidden;
@@ -200,7 +213,7 @@ table {
     white-space: nowrap;
     font-weight:lighter;
     height: 50px;
-    font-size: 30px;
+    font-size: 1.5em;
     color: var(--text-color);
     background-color: var(--object-color);
   }
@@ -393,12 +406,9 @@ table {
     text-align: center;
     padding: 30px 0px;
   }
-
-  .graph{
-    width: 500px;
-  }
-
-
+.h1-title{
+  font-size: 1.5vw;
+}
 
   .add-button{
     cursor: pointer;
@@ -500,16 +510,14 @@ height: calc(100vh - 90px);
 overflow: hidden;
 
 }
-.landing-container-left{
-height: 100%;
-width: 50%;
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 100px 0px;
-padding-left: 150px;
-
-
+.landing-container-left {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-left: 5em;
 }
 .landing-container-right{
 height: 100%;
@@ -520,8 +528,8 @@ align-items: center;
 
 }
 .landing-logo{
-  width: 50vw;
-  height: 50vw;
+  width: 45vw;
+  height: 45vw;
 }
 .landing-logo-shadow{
   background-color: var(--object-color);
@@ -536,7 +544,7 @@ align-items: center;
 .landing-title{
   color: var(--text-color);
   width: 100%;
-  font-size: 4.5vw;
+  font-size: 3vw;
   margin: 10px;
 }
 .landing-subtitle{
@@ -564,30 +572,32 @@ body .landing-socials{
  
 }
 .github-logo , .linkedin-logo ,  .youtube-logo{
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   filter: brightness(0) saturate(100%);
   margin: 50px;
   
 }
 .youtube-logo{
   margin-top: 45px;
-  height: 65px;
-  width: 65px;
+  height:40px;
+  width: 40px;
 
 }
 .landing-signup-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 60px 0px;
   align-self: flex-start;
   text-align: center;
-  padding-top: 10px;
   width: 400px;
   height: 80px;
   border: none;
   border-radius: none;
   background-color: var(--object-color);
   color: var(--text-color);
-  font-size: 50px;
+  font-size: 2em;
   font-family: 'Readex Pro', sans-serif;
 }
 
@@ -608,6 +618,24 @@ body .landing-socials{
   display: none;
 }
 @media screen and (max-width: 880px) {
+  .success_rate, .score_avg {
+    font-size: 0.8em;
+    width: 1.3em;
+height: 1.3em;
+position: relative;
+  }
+  .total_success_rate, .total_score_avg{
+    font-size: 0.8em;
+  }
+  .h1-title{
+    font-size: 1em;
+  }
+  .chart-container{
+  
+    position: relative;
+    width:100%;
+    height: auto;
+  }
   .info-header{
     font-size:10vw;
   }
@@ -778,8 +806,7 @@ body .landing-socials{
   }
   @media screen and (max-height: 930px) {
     .total_success_rate, .total_score_avg{
-      width: 120px;
-      padding: 20px;
+
     }
     .signup-title , .login-title{
       font-size: 4vh;
